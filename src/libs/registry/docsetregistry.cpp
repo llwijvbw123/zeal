@@ -174,10 +174,15 @@ QList<Docset *> DocsetRegistry::docsets() const
 
 void DocsetRegistry::search(const QString &query)
 {
+    if(isSearching){
+        return;
+    }
+    isSearching=true;
     m_cancellationToken.cancel();
 
     if (query.isEmpty()) {
         emit searchCompleted({});
+        isSearching=false;
         return;
     }
 
@@ -186,6 +191,7 @@ void DocsetRegistry::search(const QString &query)
 
 void DocsetRegistry::_runQuery(const QString &query)
 {
+    isSearching=false;
     m_cancellationToken.reset();
 
     QList<Docset *> enabledDocsets;
