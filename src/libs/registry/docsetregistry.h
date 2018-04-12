@@ -78,6 +78,7 @@ private:
     void addDocsetsFromFolder(const QString &path);
 
     QString m_storagePath;
+    bool isSearching=false;
     bool m_fuzzySearchEnabled = false;
 
     QThread *m_thread = nullptr;
